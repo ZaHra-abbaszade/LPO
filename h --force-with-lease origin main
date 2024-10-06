@@ -1,0 +1,40 @@
+[33mcommit d8d335a6ffd943459a59699b787fca880ed9acd4[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Zahra.Abbaszadeh <Zahra.Abbaszadeh@zoodfood.ir>
+Date:   Sun Oct 6 15:43:50 2024 +0330
+
+    Remove json.json and add it to .gitignore
+
+ .gitignore | 1 [32m+[m
+ 1 file changed, 1 insertion(+)
+
+[33mcommit 6c8c474b3314a1c2fc0de2b2c6c51dd5e28a181b[m
+Author: Zahra.Abbaszadeh <Zahra.Abbaszadeh@zoodfood.ir>
+Date:   Sun Oct 6 15:01:47 2024 +0330
+
+    Add json.json to .gitignore
+
+ .gitignore | 1 [32m+[m
+ 1 file changed, 1 insertion(+)
+
+[33mcommit 489cf3225d7329f98087778169a2fff080481cd3[m
+Author: Zahra.Abbaszadeh <Zahra.Abbaszadeh@zoodfood.ir>
+Date:   Sun Oct 6 15:01:38 2024 +0330
+
+    Remove json.json from history
+
+ json.json | 13 [31m-------------[m
+ 1 file changed, 13 deletions(-)
+
+[33mcommit 391fa68a7e830ebcc38ac4752ca4cb1e4c7004bd[m
+Author: Zahra.Abbaszadeh <Zahra.Abbaszadeh@zoodfood.ir>
+Date:   Sun Oct 6 14:58:48 2024 +0330
+
+    Initial commit in main branch
+
+ json.json         |  13 [32m+++++[m
+ leadcollection.py | 164 [32m++++++++++++++++++++++++++++++++++++++++++++++++++++++[m
+ nottouch.py       | 143 [32m+++++++++++++++++++++++++++++++++++++++++++++++[m
+ utils.py          |  42 [32m++++++++++++++[m
+ val_lc.py         | 123 [32m++++++++++++++++++++++++++++++++++++++++[m
+ val_nt.py         | 120 [32m+++++++++++++++++++++++++++++++++++++++[m
+ 6 files changed, 605 insertions(+)
