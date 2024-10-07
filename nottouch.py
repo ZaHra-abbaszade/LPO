@@ -1,3 +1,4 @@
+import re
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from jira import JIRA
@@ -7,10 +8,16 @@ from datetime import datetime
 from khayyam import JalaliDatetime  # برای ماه شمسی
 from pathlib import Path
 
+# Function to validate the input format for customfield_22304
+def validate_custom_field_input(input_value):
+    # The pattern should match something like "مهر 1403"
+    pattern = r"^[\u0600-\u06FF]+\s\d{4}$"
+    return bool(re.match(pattern, input_value))
+
 # تابع اصلی
 def main():
-    # گرفتن مقدار cell_value از val.py
-    cell_value = get_cell_value_from_val()  # این خط تابع ولیدیشن را فراخوانی می‌کند
+    # گرفتن مقدار cell_value از val_nt.py
+    cell_value = get_cell_value_from_val()
 
     if not cell_value:
         print("No valid cell_value found.")
@@ -22,8 +29,13 @@ def main():
     # لیست برای ذخیره issue keys و زمان آپدیت آن‌ها
     issue_keys_with_time = []
 
-    # تنظیم خودکار فیلد تاریخ با ماه شمسی فعلی
-    custom_month_field_value = get_current_jalali_date()
+    # گرفتن ورودی customfield_22304 از کاربر
+    while True:
+        custom_month_field_value = input("Enter Manual Assign Date (e.g., مهر 1403): ")
+        if validate_custom_field_input(custom_month_field_value):
+            break
+        else:
+            print("Invalid format! Please enter in the format 'ماه سال' (e.g., مهر 1403).")
 
     # 1. به‌روزرسانی برای Issues تهران
     jql_query = f"issuekey IN ({cell_value}) AND (City ~ تهران)"
@@ -36,7 +48,7 @@ def main():
         "customfield_18602": {"value": "No"},
         "customfield_11003": {"value": "E"},
         "customfield_10804": {"value": "Lead Collection"},
-        "customfield_22304": {"value": custom_month_field_value},  # ماه شمسی پویا
+        "customfield_22304": {"value": custom_month_field_value},  # استفاده از ورودی کاربر
         "customfield_14314": {"value": "Tehran Sales"},
         "customfield_11100": {"value": "Tehran"}
     }
@@ -56,7 +68,7 @@ def main():
         "customfield_18602": {"value": "No"},
         "customfield_11003": {"value": "E"},
         "customfield_10804": {"value": "Lead Collection"},
-        "customfield_22304": {"value": custom_month_field_value},  # ماه شمسی پویا
+        "customfield_22304": {"value": custom_month_field_value},  # استفاده از ورودی کاربر
         "customfield_14314": {"value": "Tehran Sales"},
         "customfield_11100": {"value": "Other Cities"}  # تغییر برای اطراف تهران
     }
@@ -76,7 +88,7 @@ def main():
         "customfield_18602": {"value": "No"},
         "customfield_11003": {"value": "E"},
         "customfield_10804": {"value": "Lead Collection"},
-        "customfield_22304": {"value": custom_month_field_value},  # ماه شمسی پویا
+        "customfield_22304": {"value": custom_month_field_value},  # استفاده از ورودی کاربر
         "customfield_14314": {"value": "Other Cities Sales"},
         "customfield_11100": {"value": "Other Cities"}  # تغییر برای سایر شهرها
     }

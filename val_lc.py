@@ -39,7 +39,7 @@ def get_jira() -> JIRA:
 # Validate issue based on City and Marketing Area
 def validate_marketing_area(issue, area_cities, no_area_cities):
     marketing_area = issue.fields.customfield_20802
-    city = issue.fields.customfield_10800  # Assuming city is stored in customfield_11100
+    city = issue.fields.customfield_10800  
 
     if city in area_cities:
         # Both parts of the marketing area should be filled

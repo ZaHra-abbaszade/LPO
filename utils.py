@@ -5,11 +5,15 @@ from datetime import datetime
 from khayyam import JalaliDatetime
 from pathlib import Path
 
-from consts import HOST, PASSWORD, USERNAME
+# Set your Jira host manually
+HOST = 'https://jira.snappfood.ir'  # Manually set the Jira host
 
 # اتصال به Jira
 def get_jira() -> JIRA:
-    return JIRA(server=HOST, basic_auth=(USERNAME, PASSWORD))
+    # Requesting username and password as input
+    username = input("Enter your Jira username: ")
+    password = input("Enter your Jira password: ")
+    return JIRA(server=HOST, basic_auth=(username, password))
 
 # احراز هویت Google Sheets
 def authenticate_gspread(json_keyfile, scope):
@@ -39,4 +43,5 @@ def get_current_jalali_date():
     current_month_name = current_jalali_datetime.strftime('%B')
     current_year = current_jalali_datetime.year
     return f"{current_month_name} {current_year}"
+
 
